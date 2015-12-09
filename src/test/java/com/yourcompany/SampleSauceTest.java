@@ -56,8 +56,8 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"Android", "Samsung Galaxy S4 Emulator", "4.4", "http://saucelabs.com/example_files/ContactManager.apk", "", "portrait", "1.4.11"},
-                new Object[]{"Android", "Samsung Galaxy S5 Emulator", "4.4", "http://saucelabs.com/example_files/ContactManager.apk", "", "portrait", "1.4.11"},
+                new Object[]{"ANDROID", "emulator-5556", "19", "/Users/moiz/workspace/appium/sample-code/apps/ContactManager/ContactManager.apk", "", "portrait", "1.4.11"},
+                new Object[]{"ANDROID", "emulator-5554", "21", "/Users/moiz/workspace/appium/sample-code/apps/ContactManager/ContactManager.apk", "", "portrait", "1.4.11"}
         };
     }
 
@@ -84,14 +84,16 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
         capabilities.setCapability("app", app);
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("deviceOrientation", deviceOrientation);
-        capabilities.setCapability("appiumVersion", appiumVersion);
+    //    capabilities.setCapability("appiumVersion", appiumVersion);
 
         String jobName = methodName + '_' + deviceName + '_' + platformName + '_' + platformVersion;
         capabilities.setCapability("name", jobName);
-
         webDriver.set(new AndroidDriver<WebElement>(
-                new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
+                new URL("http://localhost:4444/wd/hub"),
                 capabilities));
+  //      webDriver.set(new AndroidDriver<WebElement>(
+    //            new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
+      //          capabilities));
         String id = ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
         sessionId.set(id);
         return webDriver.get();
@@ -109,14 +111,14 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     @Test(dataProvider = "hardCodedBrowsers")
     public void addContactTest(String platformName, String deviceName, String platformVersion, String app, String browserName, String deviceOrientation, String appiumVersion, Method method) throws Exception {
     	WebDriver driver = createDriver(platformName, deviceName, platformVersion, app, browserName, deviceOrientation, appiumVersion, method.getName());
-    	
+
     	WebElement addContactButton = driver.findElement(By.name("Add Contact"));
     	addContactButton.click();
-    
+
     	List<WebElement> textFieldsList = driver.findElements(By.className("android.widget.EditText"));
     	textFieldsList.get(0).sendKeys("Some Name");
     	textFieldsList.get(2).sendKeys("Some@example.com");
-    	driver.findElement(By.name("Save")).click();
+    //	driver.findElement(By.name("Save")).click();
         driver.quit();
     }
 
@@ -145,4 +147,3 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
         return authentication;
     }
 }
-
