@@ -35,6 +35,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
      * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
      * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
      */
+
     public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(System.getenv("SAUCE_USERNAME"), System.getenv("SAUCE_ACCESS_KEY"));
 
     /**
@@ -56,8 +57,8 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][]{
-                new Object[]{"ANDROID", "emulator-5556", "19", "/Users/moiz/workspace/appium/sample-code/apps/ContactManager/ContactManager.apk", "", "portrait", "1.4.11"},
-                new Object[]{"ANDROID", "emulator-5554", "21", "/Users/moiz/workspace/appium/sample-code/apps/ContactManager/ContactManager.apk", "", "portrait", "1.4.11"}
+                new Object[]{"ANDROID", "emulator-5556", "21", "/Users/wayne/Downloads/ContactManager.apk", "", "portrait", "1.4.16"},
+                new Object[]{"ANDROID", "emulator-5554", "21", "/Users/wayne/Downloads/ContactManager.apk", "", "portrait", "1.4.16"}
         };
     }
 
@@ -69,7 +70,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
      *
      * @param platformName Represents the platform to be run.
      * @param deviceName Represents the device to be tested on
-     * @param platform Version Represents version of the platform.
+     * @param platformVersion Represents version of the platform.
      * @param app Represents the location of the app under test.
      * @return
      * @throws MalformedURLException if an error occurs parsing the url
@@ -84,7 +85,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
         capabilities.setCapability("app", app);
         capabilities.setCapability("browserName", browserName);
         capabilities.setCapability("deviceOrientation", deviceOrientation);
-    //    capabilities.setCapability("appiumVersion", appiumVersion);
+        capabilities.setCapability("appiumVersion", appiumVersion);
 
         String jobName = methodName + '_' + deviceName + '_' + platformName + '_' + platformVersion;
         capabilities.setCapability("name", jobName);
@@ -104,7 +105,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
      *
      * @param platformName Represents the platform to be run.
      * @param deviceName Represents the device to be tested on
-     * @param platform Version Represents version of the platform.
+     * @param platformVersion Represents version of the platform.
      * @param app Represents the location of the app under test.
      * @throws Exception if an error occurs during the running of the test
      */
@@ -118,7 +119,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     	List<WebElement> textFieldsList = driver.findElements(By.className("android.widget.EditText"));
     	textFieldsList.get(0).sendKeys("Some Name");
     	textFieldsList.get(2).sendKeys("Some@example.com");
-    //	driver.findElement(By.name("Save")).click();
+//    	driver.findElement(By.name("Save")).click();
         driver.quit();
     }
 
