@@ -58,7 +58,8 @@ public class SampleSauceTest {//implements SauceOnDemandSessionIdProvider, Sauce
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
         return new Object[][]{
                 new Object[]{"ANDROID", "emulator-5556", "21", "/Users/wayne/Downloads/ContactManager.apk", "", "portrait", "1.4.16"},
-                new Object[]{"ANDROID", "emulator-5554", "21", "/Users/wayne/Downloads/ContactManager.apk", "", "portrait", "1.4.16"}
+                new Object[]{"ANDROID", "emulator-5554", "21", "/Users/wayne/Downloads/ContactManager.apk", "", "portrait", "1.4.16"},
+                new Object[]{"ANDROID", "06df4e0e", "21", "/Users/wayne/Downloads/ContactManager.apk", "", "portrait", "1.4.16"}
         };
     }
 
@@ -66,7 +67,7 @@ public class SampleSauceTest {//implements SauceOnDemandSessionIdProvider, Sauce
      * /**
      * Constructs a new {@link RemoteWebDriver} instance which is configured to use the capabilities defined by the platformName,
      * deviceName, platformVersion, and app and which is configured to run against ondemand.saucelabs.com, using
-     * the username and access key populated by the {@link #authentication} instance.
+     * the username and access key populated by the instance.
      *
      * @param platformName Represents the platform to be run.
      * @param deviceName Represents the device to be tested on
