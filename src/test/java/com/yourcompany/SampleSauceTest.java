@@ -28,15 +28,15 @@ import java.util.List;
  * @author Neil Manvar
  */
 
-@Listeners({SauceOnDemandTestListener.class})
-public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
+//@Listeners({SauceOnDemandTestListener.class})
+public class SampleSauceTest {//implements SauceOnDemandSessionIdProvider, SauceOnDemandAuthenticationProvider {
 
     /**
      * Constructs a {@link com.saucelabs.common.SauceOnDemandAuthentication} instance using the supplied user name/access key.  To use the authentication
      * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
      */
 
-    private final SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(System.getenv("SAUCE_USERNAME"), System.getenv("SAUCE_ACCESS_KEY"));
+//    private final SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(System.getenv("SAUCE_USERNAME"), System.getenv("SAUCE_ACCESS_KEY"));
 
     /**
      * ThreadLocal variable which contains the  {@link WebDriver} instance which is used to perform browser interactions with.
@@ -46,7 +46,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     /**
      * ThreadLocal variable which contains the Sauce Job Id.
      */
-    private final ThreadLocal<String> sessionId = new ThreadLocal<String>();
+//    private final ThreadLocal<String> sessionId = new ThreadLocal<String>();
 
     /**
      * DataProvider that explicitly sets the browser combinations to be used.
@@ -95,8 +95,8 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
   //      webDriver.set(new AndroidDriver<WebElement>(
     //            new URL("http://" + authentication.getUsername() + ":" + authentication.getAccessKey() + "@ondemand.saucelabs.com:80/wd/hub"),
       //          capabilities));
-        String id = ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
-        sessionId.set(id);
+//        String id = ((RemoteWebDriver) getWebDriver()).getSessionId().toString();
+//        sessionId.set(id);
         return webDriver.get();
     }
 
@@ -135,16 +135,16 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
      *
      * @return the Sauce Job id for the current thread
      */
-    public String getSessionId() {
-        return sessionId.get();
-    }
+//    public String getSessionId() {
+//        return sessionId.get();
+//    }
 
     /**
      *
      * @return the {@link SauceOnDemandAuthentication} instance containing the Sauce username/access key
      */
-    @Override
-    public SauceOnDemandAuthentication getAuthentication() {
-        return authentication;
-    }
+//    @Override
+//    public SauceOnDemandAuthentication getAuthentication() {
+//        return authentication;
+//    }
 }
