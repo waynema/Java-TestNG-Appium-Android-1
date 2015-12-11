@@ -36,23 +36,23 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
      * supplied by environment variables or from an external file, use the no-arg {@link com.saucelabs.common.SauceOnDemandAuthentication} constructor.
      */
 
-    public SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(System.getenv("SAUCE_USERNAME"), System.getenv("SAUCE_ACCESS_KEY"));
+    private final SauceOnDemandAuthentication authentication = new SauceOnDemandAuthentication(System.getenv("SAUCE_USERNAME"), System.getenv("SAUCE_ACCESS_KEY"));
 
     /**
      * ThreadLocal variable which contains the  {@link WebDriver} instance which is used to perform browser interactions with.
      */
-    private ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
+    private final ThreadLocal<WebDriver> webDriver = new ThreadLocal<WebDriver>();
 
     /**
      * ThreadLocal variable which contains the Sauce Job Id.
      */
-    private ThreadLocal<String> sessionId = new ThreadLocal<String>();
+    private final ThreadLocal<String> sessionId = new ThreadLocal<String>();
 
     /**
      * DataProvider that explicitly sets the browser combinations to be used.
      *
-     * @param testMethod
-     * @return
+     * @param testMethod Method
+     * @return Object
      */
     @DataProvider(name = "hardCodedBrowsers", parallel = true)
     public static Object[][] sauceBrowserDataProvider(Method testMethod) {
@@ -72,7 +72,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
      * @param deviceName Represents the device to be tested on
      * @param platformVersion Represents version of the platform.
      * @param app Represents the location of the app under test.
-     * @return
+     * @return webDriver
      * @throws MalformedURLException if an error occurs parsing the url
      */
     private WebDriver createDriver(String platformName, String deviceName, String platformVersion, String app, String browserName, String deviceOrientation, String appiumVersion, String methodName) throws MalformedURLException {
@@ -126,7 +126,7 @@ public class SampleSauceTest implements SauceOnDemandSessionIdProvider, SauceOnD
     /**
      * @return the {@link WebDriver} for the current thread
      */
-    public WebDriver getWebDriver() {
+    private WebDriver getWebDriver() {
         System.out.println("WebDriver" + webDriver.get());
         return webDriver.get();
     }
